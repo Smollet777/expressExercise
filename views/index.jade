@@ -1,0 +1,70 @@
+extends layout
+
+block content
+ h1 MONGODB - EXERCISE
+ div.container
+  section.insert
+    h3 Insert Data
+    form(action='/insert', method='post')
+        div.input
+            label(for='title') Title
+            input#title(type='text', name='title')
+        div.input
+            label(for='content') Content
+            input#content(type='text', name='content')
+        div.input
+            label(for='author') Author
+            input#author(type='text', name='author')
+        button(type='submit') INSERT
+  section.get
+    h3 Get Data
+    a(href='/get-data') LOAD DATA
+    if items
+        div
+            each item in items 
+                article.item
+                    div Title: #{item.title}
+                    div Content: #{item.content}
+                    div Author: #{item.author}
+                    div ID: #{item._id}
+  section.update
+    h3 Update Data
+    form(action='/update', method='post')
+        div.input
+            label(for='id') ID
+            input#id(type='text', name='id')
+        div.input
+            label(for='title') Title
+            input#title(type='text', name='title')
+        div.input
+            label(for='content') Content
+            input#content(type='text', name='content')
+        div.input
+            label(for='author') Author
+            input#author(type='text', name='author')
+        button(type='submit') UPDATE
+  section.delete
+    h3 Delete Data
+    form(action='/delete', method='post')
+        div.input
+            label(for='id') ID
+            input#id(type='text', name='id')
+        button(type='submit') DELETE
+ div
+    if success
+        p Succesfull validation
+    else
+        if errors
+            ul
+                each err in errors
+                    li= err.msg
+                    
+        form(method='post', action='/submit')
+            label(for='email') E-mail
+            input#email(type='text', name='email')
+            label(for='password') Password
+            input#password(type='password', name='password', placeholder='at least 4 characters')
+            label(for='confirmPassword') Confirm password
+            input#confirmPassword(type='password', name='confirmPassword', placeholder='at least 4 characters')
+            button(type='submit') OK
+    
